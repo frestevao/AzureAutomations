@@ -1,4 +1,9 @@
-﻿#Copia Managed Disk como um VHD para storage Account
+<#
+Date: 13/05/2021
+Version: v1
+Description: With this script, you'll be able to convert an Managed disk to a unmanaged disk. Also, you can move the disks between regions.
+Pay atention due this, because it will cost due the traffic outside the datacenter.
+#>
 
 $tenantID = ""
 Connect-AzAccount -TenantId $tenantID
