@@ -22,29 +22,6 @@ Write-Output "======================================================"
 
 $installUpdates = Install-WuUpdates (Start-WUScan)
 
-if ($installUpdates -eq $true){
-
-    Write-Output "Patches were applied with success" 
-
-    $rebootstatus = Get-WUIspendingReboot
-
-   if ($rebootstatus -eq $true){
-    
-        Write-Output "Patches applied and the server will be rebooted"
-
-        Restart-Computer -Force
-   
-   }else{
-   
-        Write-Output "Unknown error" 
-    
-    }
-
-}Else{
-
-    Write-Output "Unknown error "
-}
-
 Write-Output "======================================================" 
 Write-Output "End of the code"
 Write-Output "======================================================"
