@@ -6,7 +6,7 @@ Write-Output ""
 
 foreach ($update in $updates){
 
-Write-Output $update.Title >> C:\scriptlogs\log.txt
+Write-Output $update.Title
 
 }
 
