@@ -1,27 +1,14 @@
-$updates = Start-WUScan 
-Write-Output "======================================================" 
-Write-Output "List of updates that will be applied" 
-Write-Output "======================================================" 
-Write-Output ""  
+sudo apt update && sudo apt upgrade
+sudo apt update && sudo apt upgrade
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:ondrej/php
 
-foreach ($update in $updates){
+sudo apt update
+sudo apt -y install php8.0
 
-Write-Output $update.Title
-
-}
-
-Write-Output ""  
-Write-Output "======================================================" 
-Write-Output "End of the list of updates" 
-Write-Output "======================================================" 
-
-Write-Output ""  
-Write-Output "======================================================" 
-Write-Output "Starting the patching application" 
-Write-Output "======================================================" 
-
-$installUpdates = Install-WuUpdates (Start-WUScan)
-
-Write-Output "======================================================" 
-Write-Output "End of the code"
-Write-Output "======================================================"
+sudo update-alternatives --set php /usr/bin/php$(phpVersion)
+sudo update-alternatives --set phar /usr/bin/phar$(phpVersion)
+sudo update-alternatives --set phpdbg /usr/bin/phpdbg$(phpVersion)
+sudo update-alternatives --set php-cgi /usr/bin/php-cgi$(phpVersion)
+sudo update-alternatives --set phar.phar /usr/bin/phar.phar$(phpVersion)
+php -version
