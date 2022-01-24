@@ -3,20 +3,39 @@ Author: Estevão França
 Script Description: This script will enable the Accelerated Nerworking in multiple VM's under the same RG
 Date: 01/19/2021
 Version: 1
+
+.Example 
+
+.\Enable-AzAcceleratedNicMultipleVMs.ps1 -subscriptionId <SubscriptionId> -tenantId <TenantId> -resourceGroupName <ResourceGroupName>
+
 #>
+
+param(
+    [Parameter(Mandatory=$True)]
+    [string]$subscriptionId,
+    
+    [Parameter(Mandatory=$True)]
+    [string]$tenantId,
+    
+    [Parameter(Mandatory=$True)]
+    [string]$resourceGroupName
+)
+
+if ($null -eq $subscriptionId -or $null -eq $tenantId -or $null -eq $resourceGroupName) {
+    Write-Error "Please, Execute the Script again"
+}else {
+    #Connecting on Azure Tenant ...
+    Write-Host "Login into the Azure Account" -ForegroundColor Blue
+    $null = az login --tenant $tenantId --verbose
+
+    #Selecting Subscription
+    Write-Host "Selecting the Subscription..." -ForegroundColor Blue
+    az account set --subscription $subscriptionId --verbose
+}
 
 
 #Variables Section
-$subscriptionId = ""
-$tenantId = ""
-$resourceGroupName = ""
 $enableAcceleratedNic = $True #The Value Should be True or False
-
-#Connecting on Azure Tenant ...
-$null = az login --tenant $tenantId
-
-#Selecting Subscription
-az account set --subscription $subscriptionId
 
 #Getting list of VM's under the RG
 $azureVM = az vm list -g $resourceGroupName | ConvertFrom-Json
