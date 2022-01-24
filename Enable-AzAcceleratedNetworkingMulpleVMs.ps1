@@ -1,21 +1,27 @@
 <#
-. Author - Estevão França
+.SYNOPSIS
+    Enable-AzAcceleratedNetworkingMultipleVMs is a sample script that can help Azure Administrators to enable Accelerated Networking in multiple VM's in the same Resource Group
 
-.PARAMETER
-    SubscriptionId: You need to inform the subscriptionId, in case your tenant has more than one subscription.
-    TenantID: You need to inform the tenantId, in case your user has access to more than one Tenant.
-    Resource Group Name: Resource Group where you store your VM's
+.DESCRIPTION
+    This script will helps to enable the Accelerated Networking in multilple VM's under the same Resource Group, it will verify if the feature is enabled and if the VM does supports.
+
+.PARAMETER SubscriptionId
+    You need to inform the subscriptionId, in case your tenant has more than one subscription.
+.PARAMETER TenantId
+    You need to inform the tenantId, in case your user has access to more than one Tenant.
+.PARAMETER ResourceGroupName    
+    Resource Group where you store your VM's
 
 .DESCRIPTION
     This script will enable the Accelerated Nerworking in multiple VM's under the same RG
 
-. DATE: 01/24/2021
-
-. Version: 2
-
 .Example 
+    .\Enable-AzAcceleratedNicMultipleVMs.ps1 -subscriptionId <SubscriptionId> -tenantId <TenantId> -resourceGroupName <ResourceGroupName>
 
-.\Enable-AzAcceleratedNicMultipleVMs.ps1 -subscriptionId <SubscriptionId> -tenantId <TenantId> -resourceGroupName <ResourceGroupName>
+.NOTES
+
+    Version: 1
+    Date: 01/24/2022
 #>
 
 param(
@@ -82,7 +88,6 @@ foreach ($vm in $azureVM){
         Write-Host "Enabling..."
 
         Write-Host ""
-        Write-Host ""
 
         # Deallocate the VM
         Write-Host "Checking if the VM is deallocated" -ForegroundColor Gray
@@ -96,30 +101,29 @@ foreach ($vm in $azureVM){
             az vm deallocate --name $vm.name --resource-group $resourceGroupName
         }
         Write-Host ""
-        Write-Host ""
         #enabling ...
         Write-Host ""
         Write-Host "Enabling Accelerated Networking..."
-        az network nic update --name $vmSetting.networkProfile.networkInterfaces.Id.Split('/')[8] --resource-group $resourceGroupName --accelerated-networking $enableAcceleratedNic
+        $enableAccelerated = az network nic update --name $vmSetting.networkProfile.networkInterfaces.Id.Split('/')[8] --resource-group $resourceGroupName --accelerated-networking $enableAcceleratedNic
+        $nicState2 = az network nic show --name $vmSetting.networkProfile.networkInterfaces.Id.Split('/')[8] --resource-group $resourceGroupName | ConvertFrom-Json
+        if ($nicState2.enableAcceleratedNetworking -ne $true) {
+            Write-Host "Error -> Accelerated Network was not enabled on" $vm.name -ForegroundColor Red
+        }else {
+            Write-Host "Success -> Accelerated Network was enabled on"  $vm.name -ForegroundColor Green
+        }
         #Starting VM
         Write-Host ""
-        Write-Host ""
-        Write-Host ""
         Write-Output "Starting VM..."
-        Write-Host ""
         Write-Host ""
         az vm start --name $vm.name --resource-group $resourceGroupName --no-wait
         Write-Warning -Message "VM will be started in the backgroud, please check VM state over the Azure Portal"
         Write-Host "Preparing next VM.." -ForegroundColor Yellow
         Write-Host "================" -ForegroundColor Green
-        Write-Host ""
 
     }else {
         Write-Host ""
-        Write-Host ""
         Write-Host "Accelerated nic is enabled or cannot be enabled on VM:" $vm.name -ForegroundColor Red
         Write-Host "Going to the Next VM..."
-        Write-Host ""
         Write-Host "===============" -ForegroundColor Green
     }
 
