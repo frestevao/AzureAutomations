@@ -1,13 +1,21 @@
 <#
-Author: Estevão França
-Script Description: This script will enable the Accelerated Nerworking in multiple VM's under the same RG
-Date: 01/19/2021
-Version: 1
+. Author - Estevão França
+
+.PARAMETER
+    SubscriptionId: You need to inform the subscriptionId, in case your tenant has more than one subscription.
+    TenantID: You need to inform the tenantId, in case your user has access to more than one Tenant.
+    Resource Group Name: Resource Group where you store your VM's
+
+.DESCRIPTION
+    This script will enable the Accelerated Nerworking in multiple VM's under the same RG
+
+. DATE: 01/24/2021
+
+. Version: 2
 
 .Example 
 
 .\Enable-AzAcceleratedNicMultipleVMs.ps1 -subscriptionId <SubscriptionId> -tenantId <TenantId> -resourceGroupName <ResourceGroupName>
-
 #>
 
 param(
