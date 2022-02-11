@@ -1,6 +1,16 @@
 # AzureAutomations
-This Repository have tools and resources that can make you life a little bit ease on Azure (At least, mine is).
 
-Please, review all scripts before run on your production Environment.
+Hey Guys!
 
-I'm not responsible for any damage.
+This is my public repository for some automations that I on Azure for my daily bases tasks.
+This might help you, so use it with wisdom =D
+
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## Note
+
+Please, do not execute these scripts in your production environment before testing it properly.
