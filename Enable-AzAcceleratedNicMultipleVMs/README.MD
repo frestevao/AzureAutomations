@@ -1,20 +1,19 @@
-.SYNOPSIS
-    Enable-AzAcceleratedNetworkingMultipleVMs is a sample script that can help Azure Administrators to enable Accelerated Networking in multiple VM's in the same Resource Group
-.DESCRIPTION
-    This script will helps to enable the Accelerated Networking in multilple VM's under the same Resource Group, it will verify if the feature is enabled and if the VM does supports.
-.PARAMETER SubscriptionId
-    You need to inform the subscriptionId, in case your tenant has more than one subscription.
-.PARAMETER TenantId
-    You need to inform the tenantId, in case your user has access to more than one Tenant.
-.PARAMETER ResourceGroupName    
-    Resource Group where you store your VM's
-.DESCRIPTION
-    This script will enable the Accelerated Nerworking in multiple VM's under the same RG
-.Example 
-    .\Enable-AzAcceleratedNicMultipleVMs.ps1 -subscriptionId <SubscriptionId> -tenantId <TenantId> -resourceGroupName <ResourceGroupName>
-.NOTES
-    Version: 1
-    Date: 01/24/2022
+# Enable-AzAcceleratedNicMultipleVMs
+
+This script allows you to enable Acellerated Networking on multiple VM's
+
+## Usage
+
+```
+
+.\Enable-AzAcceleratedNicMultipleVMs.ps1 -subscriptionId <SubscriptionId> -tenantId <TenantId> -resourceGroupName <ResourceGroupName>
+
+```
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
 
 .NOTES
 
