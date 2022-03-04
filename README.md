@@ -2,7 +2,7 @@
 
 Hey Guys!
 
-This is my public repository for some automations that I on Azure for my daily bases tasks.
+This is my public repository for some automations that I use on Azure for my daily bases tasks.
 This might help you, so use it with wisdom =D
 
 
