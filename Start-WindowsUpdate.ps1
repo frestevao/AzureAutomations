@@ -9,6 +9,7 @@ $logPath = Test-Path -Path "C:\scriptlogs"
 if ($logPath -eq $false){
 
     Write-Error -Message "Log path doesn't exist"
+    New-Item -ItemType Directory -Name "scriptlogs" -Path "C:\"
 }else {
     Write-Output "Log path does exist"
 }
